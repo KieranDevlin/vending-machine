@@ -7,12 +7,6 @@ describe('VendingMachine', () => {
     vendingMachine = new VendingMachine(inventory);
   });
 
-  //   describe('if VendingMachine does not start with inventory', () => {
-  //     it('should throw error', () => {
-  //       expect(new VendingMachine()).toThrow();
-  //     });
-  //   });
-
   describe('if VendingMachine args are empty', () => {
     it('should throw an error', () => {
       expect(() => new VendingMachine()).toThrow();
@@ -21,7 +15,15 @@ describe('VendingMachine', () => {
 
   describe('when inventory is checked', () => {
     it('should print the inventory', () => {
-      expect(vendingMachine.printInventory()).toEqual(inventory.items);
+      expect(vendingMachine.printInventory()).toBe(inventory);
+    });
+  });
+
+  describe('when inventory is refilled', () => {
+    it('should refill to the original inventory and print the difference', () => {
+      vendingMachine.inventory.coins.forEach(coin => (coin.currentCount = 20));
+      vendingMachine.inventory.items.forEach(item => (item.currentCount = 20));
+      expect(vendingMachine.refillInventory()).toBe(inventory);
     });
   });
 });

@@ -32,11 +32,21 @@ module.exports = class VendingMachine {
     if (!inventory) {
       throw new Error('Inventory cannot be empty');
     }
-    this.inventory = inventory.items;
-    this.coins = inventory.coins;
+    this.inventory = inventory;
   }
 
   printInventory() {
     return this.inventory;
+  }
+
+  refillInventory() {
+    this.inventory.items.map(item => {
+      item.currentCount = item.maxCount;
+    }),
+      this.inventory.coins.map(coin => {
+        coin.currentCount = coin.maxCount;
+      });
+
+    return this.printInventory();
   }
 };

@@ -1,31 +1,64 @@
 {
   "items": [
     {
+      "id": "A1",
       "name": "COKE",
       "cost": 1,
       "maxCount": 100,
       "currentCount": 100
     },
     {
+      "id": "A2",
       "name": "ORANGE",
       "cost": 1,
       "maxCount": 100,
       "currentCount": 100
     },
     {
+      "id": "A3",
       "name": "PURPLE",
       "cost": 1,
       "maxCount": 100,
       "currentCount": 100
     },
     {
+      "id": "B1",
       "name": "ROOTBEER",
       "cost": 1,
       "maxCount": 100,
       "currentCount": 100
     },
     {
+      "id": "B2",
       "name": "WATER",
+      "cost": 1,
+      "maxCount": 100,
+      "currentCount": 100
+    },
+    {
+      "id": "B3",
+      "name": "CHIPS",
+      "cost": 1,
+      "maxCount": 100,
+      "currentCount": 100
+    },
+    {
+      "id": "C1",
+      "name": "CHOCOLATE",
+      "cost": 1,
+      "maxCount": 100,
+      "currentCount": 100
+    },
+    {
+      "id": "C2",
+      "name": "MINTS",
+      "cost": 1,
+      "maxCount": 100,
+      "currentCount": 100
+    },
+    {
+      "id": "C3",
+      "name": "RAISINS",
       "cost": 1,
       "maxCount": 100,
       "currentCount": 100
