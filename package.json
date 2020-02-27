@@ -1,0 +1,19 @@
+{
+  "name": "vendingMachine",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --verbose",
+    "dev": "nodemon ./js/vendingMachine.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jest-cli": "^25.1.0"
+  },
+  "dependencies": {
+    "nodemon": "^2.0.2"
+  }
+}
