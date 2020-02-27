@@ -9,8 +9,8 @@
 //
 // an inventory object which includes :
 //  - total coin
-//  - inventory object(array of objects?):
-//      - id
+//  - inventory object(array of objects):
+//      - id will be the index of the item in the array
 //      - name
 //      - max count
 //      - current count
@@ -27,9 +27,46 @@
 //
 //
 
-let vendo = class {
-  constructor(name) {
-    this.name = name;
+class vendingMachine {
+  constructor(
+    inventory = [
+      {
+        name: 'COKE',
+        cost: 1,
+        maxCount: 100,
+        currentCount: 100
+      },
+      {
+        name: 'ORANGE',
+        cost: 1,
+        maxCount: 100,
+        currentCount: 100
+      },
+      {
+        name: 'PURPLE',
+        cost: 1,
+        maxCount: 100,
+        currentCount: 100
+      },
+      {
+        name: 'ROOTBEER',
+        cost: 1,
+        maxCount: 100,
+        currentCount: 100
+      },
+      {
+        name: 'WATER',
+        cost: 1,
+        maxCount: 100,
+        currentCount: 100
+      }
+    ],
+    cashFloat = 100
+  ) {
+    // if (!inventory) throw new Error('Inventory cannot be empty');
+    this.inventory = inventory;
+    this.cashFloat = cashFloat;
   }
-};
-console.log(new vendo('vend-o-3000'));
+}
+
+module.exports = vendingMachine;

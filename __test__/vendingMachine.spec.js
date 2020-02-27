@@ -1,12 +1,51 @@
 const vendingMachine = require('../js/vendingMachine');
 
-// describe('vendingMachine', () => {
-//   describe('if vend-o-3000 does not recieve args', () => {
-//     it('should do a thing', () => {
-//       expect(vendingMachine.myFunc(x, y, z)).toBe('something');
-//     });
-//   });
-// });
+describe('vendingMachine', () => {
+  //   describe('if vendingMachine does not start with inventory', () => {
+  //     it('should throw error', () => {
+  //       expect(new vendingMachine('')).toThrow();
+  //     });
+  //   });
+  describe('if vendingMachine args are empty', () => {
+    it('should have default values', () => {
+      expect(new vendingMachine()).toEqual({
+        inventory: [
+          {
+            name: 'COKE',
+            cost: 1,
+            maxCount: 100,
+            currentCount: 100
+          },
+          {
+            name: 'ORANGE',
+            cost: 1,
+            maxCount: 100,
+            currentCount: 100
+          },
+          {
+            name: 'PURPLE',
+            cost: 1,
+            maxCount: 100,
+            currentCount: 100
+          },
+          {
+            name: 'ROOTBEER',
+            cost: 1,
+            maxCount: 100,
+            currentCount: 100
+          },
+          {
+            name: 'WATER',
+            cost: 1,
+            maxCount: 100,
+            currentCount: 100
+          }
+        ],
+        cashFloat: 100
+      });
+    });
+  });
+});
 
 // inventory should print the current items count that are greater than 0 -- SHOULD it print all items? items including those at 0 count?
 // refill should reset item count to max count - return that is succeeded and what the refill amount was -- SHOULD it be all items or 1 specific refill item, sould I have both methods?
