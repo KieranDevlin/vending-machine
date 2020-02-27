@@ -27,46 +27,16 @@
 //
 //
 
-class vendingMachine {
-  constructor(
-    inventory = [
-      {
-        name: 'COKE',
-        cost: 1,
-        maxCount: 100,
-        currentCount: 100
-      },
-      {
-        name: 'ORANGE',
-        cost: 1,
-        maxCount: 100,
-        currentCount: 100
-      },
-      {
-        name: 'PURPLE',
-        cost: 1,
-        maxCount: 100,
-        currentCount: 100
-      },
-      {
-        name: 'ROOTBEER',
-        cost: 1,
-        maxCount: 100,
-        currentCount: 100
-      },
-      {
-        name: 'WATER',
-        cost: 1,
-        maxCount: 100,
-        currentCount: 100
-      }
-    ],
-    cashFloat = 100
-  ) {
-    // if (!inventory) throw new Error('Inventory cannot be empty');
-    this.inventory = inventory;
-    this.cashFloat = cashFloat;
+module.exports = class VendingMachine {
+  constructor(inventory) {
+    if (!inventory) {
+      throw new Error('Inventory cannot be empty');
+    }
+    this.inventory = inventory.items;
+    this.coins = inventory.coins;
   }
-}
 
-module.exports = vendingMachine;
+  printInventory() {
+    return this.inventory;
+  }
+};

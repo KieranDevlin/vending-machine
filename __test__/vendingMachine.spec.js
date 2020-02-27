@@ -1,48 +1,27 @@
-const vendingMachine = require('../js/vendingMachine');
+const VendingMachine = require('../js/VendingMachine');
+const inventory = require('../mockData.json');
 
-describe('vendingMachine', () => {
-  //   describe('if vendingMachine does not start with inventory', () => {
+describe('VendingMachine', () => {
+  let vendingMachine;
+  beforeEach(() => {
+    vendingMachine = new VendingMachine(inventory);
+  });
+
+  //   describe('if VendingMachine does not start with inventory', () => {
   //     it('should throw error', () => {
-  //       expect(new vendingMachine('')).toThrow();
+  //       expect(new VendingMachine()).toThrow();
   //     });
   //   });
-  describe('if vendingMachine args are empty', () => {
-    it('should have default values', () => {
-      expect(new vendingMachine()).toEqual({
-        inventory: [
-          {
-            name: 'COKE',
-            cost: 1,
-            maxCount: 100,
-            currentCount: 100
-          },
-          {
-            name: 'ORANGE',
-            cost: 1,
-            maxCount: 100,
-            currentCount: 100
-          },
-          {
-            name: 'PURPLE',
-            cost: 1,
-            maxCount: 100,
-            currentCount: 100
-          },
-          {
-            name: 'ROOTBEER',
-            cost: 1,
-            maxCount: 100,
-            currentCount: 100
-          },
-          {
-            name: 'WATER',
-            cost: 1,
-            maxCount: 100,
-            currentCount: 100
-          }
-        ],
-        cashFloat: 100
-      });
+
+  describe('if VendingMachine args are empty', () => {
+    it('should throw an error', () => {
+      expect(() => new VendingMachine()).toThrow();
+    });
+  });
+
+  describe('when inventory is checked', () => {
+    it('should print the inventory', () => {
+      expect(vendingMachine.printInventory()).toEqual(inventory.items);
     });
   });
 });
