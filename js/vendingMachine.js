@@ -35,7 +35,9 @@ module.exports = class VendingMachine {
     this.inventory = inventory;
   }
 
-  //PRINTS ALL CURRENT ITEMS AND COINS
+  ////////////////////////////////////////////////
+  ///// PRINTS ALL CURRENT ITEMS AND COINS ///////
+  ////////////////////////////////////////////////
   printInventory() {
     return this.inventory;
   }
@@ -68,7 +70,9 @@ module.exports = class VendingMachine {
   //   return this.printInventory();
   // }
 
-  //LOOPS THROUGH ALL ITEMS TO SEE IF THEY ARE AT MAX COUNT, REPLACS IF < MAX
+  ///////////////////////////////////////////////////////////////////////////////
+  // LOOPS THROUGH ALL ITEMS TO SEE IF THEY ARE AT MAX COUNT, REPLACS IF < MAX //
+  ///////////////////////////////////////////////////////////////////////////////
   refillItems() {
     let itemDiff = false;
 
@@ -82,7 +86,9 @@ module.exports = class VendingMachine {
     return this.printInventory();
   }
 
-  //LOOPS THROUGH ALL COINS TO SEE IF THEY ARE AT MAX COUNT, REPLACS IF < MAX
+  ///////////////////////////////////////////////////////////////////////////////
+  // LOOPS THROUGH ALL COINS TO SEE IF THEY ARE AT MAX COUNT, REPLACS IF < MAX //
+  ///////////////////////////////////////////////////////////////////////////////
   refillCoins() {
     let coinDiff = false;
 
@@ -97,13 +103,21 @@ module.exports = class VendingMachine {
     return this.printInventory();
   }
 
-  //GRABS ITEM BY ID AND TAKES AN UNKNOWN AMOUNT OF CHANGE AS ARGS
-  dispense(itemId, [...change]) {
+  ////////////////////////////////////////////////////////////////////
+  // GRABS ITEM BY ID AND TAKES AN UNKNOWN AMOUNT OF CHANGE AS ARGS //
+  ////////////////////////////////////////////////////////////////////
+  dispense(itemId, [...payment]) {
     const coinReturn = [];
+
+    //REJECTS PURCHASE IF BILLS ARE USED
+    let bills = payment.find(money => money > 2);
+    if (bills) {
+      return 'Only coins are accepted';
+    }
 
     //ADDS COINS AS A TOTAL
     let initVal = 0;
-    let totalCoin = change.reduce((acc, item) => {
+    let totalCoin = payment.reduce((acc, item) => {
       return acc + item;
     }, initVal);
 

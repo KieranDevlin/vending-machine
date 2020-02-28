@@ -46,6 +46,16 @@ describe('VendingMachine', () => {
       expect(vendingMachine.dispense('A1', [0.5])).toBe('Insufficient funds');
     });
   });
+  describe('when attempt to purchase item with a bill', () => {
+    it('should return "Only coins are accepted"', () => {
+      expect(vendingMachine.dispense('A1', [5])).toBe(
+        'Only coins are accepted'
+      );
+      expect(vendingMachine.dispense('A1', [1, 0.25, 0.25, 5])).toBe(
+        'Only coins are accepted'
+      );
+    });
+  });
   describe('when item is purchased with more than $2', () => {
     it('should return all extra coins', () => {
       expect(vendingMachine.dispense('A1', [1, 1, 1, 1, 1])).toBe(
