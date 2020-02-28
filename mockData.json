@@ -66,20 +66,8 @@
   ],
   "coins": [
     {
-      "id": "nickel",
-      "value": 0.05,
-      "maxCount": 100,
-      "currentCount": 100
-    },
-    {
-      "id": "dime",
-      "value": 0.1,
-      "maxCount": 100,
-      "currentCount": 100
-    },
-    {
-      "id": "quarter",
-      "value": 0.25,
+      "id": "toonie",
+      "value": 2,
       "maxCount": 100,
       "currentCount": 100
     },
@@ -90,8 +78,20 @@
       "currentCount": 100
     },
     {
-      "id": "toonie",
-      "value": 2,
+      "id": "quarter",
+      "value": 0.25,
+      "maxCount": 100,
+      "currentCount": 100
+    },
+    {
+      "id": "dime",
+      "value": 0.1,
+      "maxCount": 100,
+      "currentCount": 100
+    },
+    {
+      "id": "nickel",
+      "value": 0.05,
       "maxCount": 100,
       "currentCount": 100
     }

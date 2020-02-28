@@ -130,28 +130,32 @@ module.exports = class VendingMachine {
       while ((totalCoin - dispensedItem.cost).toFixed(2) >= 2) {
         coinReturn.push(2);
         totalCoin = totalCoin - 2;
+        this.inventory.coins[0].currentCount--;
       }
       while ((totalCoin - dispensedItem.cost).toFixed(2) >= 1) {
         coinReturn.push(1);
         totalCoin = totalCoin - 1;
+        this.inventory.coins[1].currentCount--;
       }
       while ((totalCoin - dispensedItem.cost).toFixed(2) >= 0.25) {
         coinReturn.push(0.25);
         totalCoin = totalCoin - 0.25;
+        this.inventory.coins[2].currentCount--;
       }
       while ((totalCoin - dispensedItem.cost).toFixed(2) >= 0.1) {
         coinReturn.push(0.1);
         totalCoin = totalCoin - 0.1;
+        this.inventory.coins[3].currentCount--;
       }
       while ((totalCoin - dispensedItem.cost).toFixed(2) >= 0.05) {
         coinReturn.push(0.05);
         totalCoin = totalCoin - 0.05;
+        this.inventory.coins[4].currentCount--;
       }
     }
 
     //REDUCES ITEM COUNT BY 1
     dispensedItem.currentCount--;
-
     return `Dispensed Item: ${dispensedItem.name}\nExtra change: ${coinReturn}`;
   }
 };
