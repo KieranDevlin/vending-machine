@@ -92,4 +92,43 @@ module.exports = class VendingMachine {
 
     return this.printInventory();
   }
+
+  //GRABS ITEM BY ID AND TAKES AN UNKNOWN AMOUNT OF CHANGE AS ARGS
+  dispense(itemId, [...change]) {
+    const result = [];
+    const coinReturn = [];
+
+    //CHECKS IF TOTAL COINS IS SUFFICIENT FOR PURCHASE
+    let initVal = 0;
+    let totalCoin = change.reduce((acc, item) => {
+      return acc + item;
+    }, initVal);
+
+    // TODO - CREATE AN ARRAY THAT RETURNS ALL COMBINATION OF COINS ABOVE $2??
+    // let initVal = 0;
+    // change.forEach(coin => {
+    //   if (initVal > 2) {
+    //     // console.log((initVal - 2).toFixed(2));
+    //     // return (initVal - 2).toFixed(2);
+    //     return coinReturn.push((initVal - 2).toFixed(2));
+    //   }
+    //   initVal = initVal + coin;
+    //   // return;
+    // });
+
+    // const addedCoin = this.inventory.coins.find(
+    //   coin => coin.value === change.find(coin => coin === 1)
+    // );
+
+    const dispensedItem = this.inventory.items.find(item => item.id === itemId);
+
+    if (dispensedItem.cost > totalCoin) {
+      return 'Insufficient funds';
+    }
+
+    dispensedItem.currentCount--;
+    result.push(dispensedItem);
+
+    return `Extra change: ${coinReturn}`;
+  }
 };

@@ -41,16 +41,53 @@ describe('VendingMachine', () => {
       expect(vendingMachine.refillCoins()).toBe('Coins are full!');
     });
   });
+  describe('when attempt to purchase item with insufficient funds', () => {
+    it('should return "Insufficient funds"', () => {
+      expect(vendingMachine.dispense('A1', [0.5])).toBe('Insufficient funds');
+    });
+  });
+  //   describe('when item is purchased with more than $2', () => {
+  //     it('should return all extra coins', () => {
+  //       expect(vendingMachine.dispense('A1', [1, 1, 1, 1, 1])).toBe(
+  //         'Extra change: 1,1,1'
+  //       );
+  //       expect(
+  //         vendingMachine.dispense('A1', [0.25, 0.25, 0.25, 0.25, 0.05, 1])
+  //       ).toBe('Extra change: .05');
+  //     });
+  //   });
+  //   describe('when item is purchased with correct amount of change', () => {
+  //     it('should return items and coins minus what was purchased', () => {
+  //       expect(vendingMachine.dispense('A1', [1])).toBe(
+  //         {
+  //           id: 'A1',
+  //           name: 'COKE',
+  //           cost: 1,
+  //           maxCount: 100,
+  //           currentCount: 99
+  //         },
+  //         {
+  //           id: 'loonie',
+  //           value: 1,
+  //           maxCount: 100,
+  //           currentCount: 101
+  //         }
+  //       );
+  //     });
+  //   });
 });
 
+//////////////DONE
 // inventory should print the current items count that are greater than 0 -- SHOULD it print all items? items including those at 0 count?
 // refill should reset item count to max count - return that is succeeded and what the refill amount was -- SHOULD it be all items or 1 specific refill item, sould I have both methods?
 // re-supply change should reset change count to max - return that it succeeded and what the refill amount was - SOULD it execute a specific coin count?
+// if coins is full, test should immediatly return full
+// if inventory is full, test should immediatly return full
+
+//////////////TODO
 // dispense should reduce item count by 1, but only when change is equal or greater than cost of item, if change is greater than cost - calculate difference and dispense extra change
 // if coins entered equal/exceed total coin reject all incoming coins
 // if coins arent divisible by 5, reject amount of coins to hit a number that is divisible by 5 (remove all pennies immeditatly)
-// if coins is full, test should immediatly return full
-// if inventory is full, test should immediatly return full
 
 ////////////////////////////////////////////// TODO
 // Print vending machine inventory
