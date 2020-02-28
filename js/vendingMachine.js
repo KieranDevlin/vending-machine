@@ -95,7 +95,6 @@ module.exports = class VendingMachine {
 
   //GRABS ITEM BY ID AND TAKES AN UNKNOWN AMOUNT OF CHANGE AS ARGS
   dispense(itemId, [...change]) {
-    const result = [];
     const coinReturn = [];
 
     //CHECKS IF TOTAL COINS IS SUFFICIENT FOR PURCHASE
@@ -104,31 +103,36 @@ module.exports = class VendingMachine {
       return acc + item;
     }, initVal);
 
-    // TODO - CREATE AN ARRAY THAT RETURNS ALL COMBINATION OF COINS ABOVE $2??
-    // let initVal = 0;
-    // change.forEach(coin => {
-    //   if (initVal > 2) {
-    //     // console.log((initVal - 2).toFixed(2));
-    //     // return (initVal - 2).toFixed(2);
-    //     return coinReturn.push((initVal - 2).toFixed(2));
-    //   }
-    //   initVal = initVal + coin;
-    //   // return;
-    // });
-
-    // const addedCoin = this.inventory.coins.find(
-    //   coin => coin.value === change.find(coin => coin === 1)
-    // );
-
     const dispensedItem = this.inventory.items.find(item => item.id === itemId);
 
+    //DISPENSES APPROPIRATE AMOUNT OF CHANGE
     if (dispensedItem.cost > totalCoin) {
       return 'Insufficient funds';
+    } else {
+      while ((totalCoin - dispensedItem.cost).toFixed(2) >= 2) {
+        coinReturn.push(2);
+        totalCoin = totalCoin - 2;
+      }
+      while ((totalCoin - dispensedItem.cost).toFixed(2) >= 1) {
+        coinReturn.push(1);
+        totalCoin = totalCoin - 1;
+      }
+      while ((totalCoin - dispensedItem.cost).toFixed(2) >= 0.25) {
+        coinReturn.push(0.25);
+        totalCoin = totalCoin - 0.25;
+      }
+      while ((totalCoin - dispensedItem.cost).toFixed(2) >= 0.1) {
+        coinReturn.push(0.1);
+        totalCoin = totalCoin - 0.1;
+      }
+      while ((totalCoin - dispensedItem.cost).toFixed(2) >= 0.05) {
+        coinReturn.push(0.05);
+        totalCoin = totalCoin - 0.05;
+      }
     }
 
     dispensedItem.currentCount--;
-    result.push(dispensedItem);
 
-    return `Extra change: ${coinReturn}`;
+    return `Dispensed Item: ${dispensedItem.name}\nExtra change: ${coinReturn}`;
   }
 };

@@ -10,14 +10,14 @@
     {
       "id": "A2",
       "name": "ORANGE",
-      "cost": 1,
+      "cost": 1.9,
       "maxCount": 100,
       "currentCount": 100
     },
     {
       "id": "A3",
       "name": "PURPLE",
-      "cost": 1,
+      "cost": 1.25,
       "maxCount": 100,
       "currentCount": 100
     },

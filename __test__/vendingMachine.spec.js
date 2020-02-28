@@ -46,16 +46,23 @@ describe('VendingMachine', () => {
       expect(vendingMachine.dispense('A1', [0.5])).toBe('Insufficient funds');
     });
   });
-  //   describe('when item is purchased with more than $2', () => {
-  //     it('should return all extra coins', () => {
-  //       expect(vendingMachine.dispense('A1', [1, 1, 1, 1, 1])).toBe(
-  //         'Extra change: 1,1,1'
-  //       );
-  //       expect(
-  //         vendingMachine.dispense('A1', [0.25, 0.25, 0.25, 0.25, 0.05, 1])
-  //       ).toBe('Extra change: .05');
-  //     });
-  //   });
+  describe('when item is purchased with more than $2', () => {
+    it('should return all extra coins', () => {
+      expect(vendingMachine.dispense('A1', [1, 1, 1, 1, 1])).toBe(
+        'Dispensed Item: COKE\nExtra change: 2,2'
+      );
+
+      expect(
+        vendingMachine.dispense('A1', [0.25, 0.25, 0.25, 0.25, 0.05, 1])
+      ).toBe('Dispensed Item: COKE\nExtra change: 1,0.05');
+      expect(
+        vendingMachine.dispense('A2', [0.25, 0.25, 0.25, 0.25, 0.05, 1])
+      ).toBe('Dispensed Item: ORANGE\nExtra change: 0.1,0.05');
+      expect(vendingMachine.dispense('A3', [2, 2, 2, 2, 2])).toBe(
+        'Dispensed Item: PURPLE\nExtra change: 2,2,2,2,0.25,0.25,0.25'
+      );
+    });
+  });
   //   describe('when item is purchased with correct amount of change', () => {
   //     it('should return items and coins minus what was purchased', () => {
   //       expect(vendingMachine.dispense('A1', [1])).toBe(
