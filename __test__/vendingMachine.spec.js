@@ -51,7 +51,6 @@ describe('VendingMachine', () => {
       expect(vendingMachine.dispense('A1', [1, 1, 1, 1, 1])).toBe(
         'Dispensed Item: COKE\nExtra change: 2,2'
       );
-
       expect(
         vendingMachine.dispense('A1', [0.25, 0.25, 0.25, 0.25, 0.05, 1])
       ).toBe('Dispensed Item: COKE\nExtra change: 1,0.05');

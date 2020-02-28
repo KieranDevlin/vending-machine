@@ -35,6 +35,7 @@ module.exports = class VendingMachine {
     this.inventory = inventory;
   }
 
+  //PRINTS ALL CURRENT ITEMS AND COINS
   printInventory() {
     return this.inventory;
   }
@@ -67,6 +68,7 @@ module.exports = class VendingMachine {
   //   return this.printInventory();
   // }
 
+  //LOOPS THROUGH ALL ITEMS TO SEE IF THEY ARE AT MAX COUNT, REPLACS IF < MAX
   refillItems() {
     let itemDiff = false;
 
@@ -79,6 +81,8 @@ module.exports = class VendingMachine {
     if (!itemDiff) return 'Items are full!';
     return this.printInventory();
   }
+
+  //LOOPS THROUGH ALL COINS TO SEE IF THEY ARE AT MAX COUNT, REPLACS IF < MAX
   refillCoins() {
     let coinDiff = false;
 
@@ -97,7 +101,7 @@ module.exports = class VendingMachine {
   dispense(itemId, [...change]) {
     const coinReturn = [];
 
-    //CHECKS IF TOTAL COINS IS SUFFICIENT FOR PURCHASE
+    //ADDS COINS AS A TOTAL
     let initVal = 0;
     let totalCoin = change.reduce((acc, item) => {
       return acc + item;
@@ -105,7 +109,7 @@ module.exports = class VendingMachine {
 
     const dispensedItem = this.inventory.items.find(item => item.id === itemId);
 
-    //DISPENSES APPROPIRATE AMOUNT OF CHANGE
+    //DISPENSES APPROPIRATE AMOUNT OF CHANGE OR DENIES PURCHASE IF INSUFFICIENT FUNDS
     if (dispensedItem.cost > totalCoin) {
       return 'Insufficient funds';
     } else {
@@ -131,6 +135,7 @@ module.exports = class VendingMachine {
       }
     }
 
+    //REDUCES ITEM COUNT BY 1
     dispensedItem.currentCount--;
 
     return `Dispensed Item: ${dispensedItem.name}\nExtra change: ${coinReturn}`;
