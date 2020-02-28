@@ -19,11 +19,26 @@ describe('VendingMachine', () => {
     });
   });
 
-  describe('when inventory is refilled', () => {
-    it('should refill to the original inventory and print the difference', () => {
-      vendingMachine.inventory.coins.forEach(coin => (coin.currentCount = 20));
+  describe('when items are refilled', () => {
+    it('should refill to the maxCount and print the inventory', () => {
       vendingMachine.inventory.items.forEach(item => (item.currentCount = 20));
-      expect(vendingMachine.refillInventory()).toBe(inventory);
+      expect(vendingMachine.refillItems()).toBe(inventory);
+    });
+  });
+  describe('when coins are refilled', () => {
+    it('should refill to the maxCount and print the inventory', () => {
+      vendingMachine.inventory.coins.forEach(coin => (coin.currentCount = 20));
+      expect(vendingMachine.refillCoins()).toBe(inventory);
+    });
+  });
+  describe('when items are full but refilled is executed', () => {
+    it('should return "Items are full!"', () => {
+      expect(vendingMachine.refillItems()).toBe('Items are full!');
+    });
+  });
+  describe('when coins are full but refilled is executed', () => {
+    it('should return "Coins are full!"', () => {
+      expect(vendingMachine.refillCoins()).toBe('Coins are full!');
     });
   });
 });

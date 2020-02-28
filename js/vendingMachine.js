@@ -39,13 +39,56 @@ module.exports = class VendingMachine {
     return this.inventory;
   }
 
-  refillInventory() {
-    this.inventory.items.map(item => {
-      item.currentCount = item.maxCount;
-    }),
-      this.inventory.coins.map(coin => {
+  // THIS IS FOR SUPPLY CHAIN SO THE VENDING MACHINE OWNER KNOWS HOW MUCH INVENTORY THEY TURNOVER/REFILL
+  // refillInventory() {
+  // let itemDiff = [];
+  // let coinDiff = [];
+
+  // itemDiff = this.inventory.items.map(
+  //   item =>
+  //     item.currentCount !== item.maxCount && {
+  //       id: item.id,
+  //       diff: item.maxCount - item.currentCount
+  //     }
+  // );
+  // coinDiff = this.inventory.coins.map(
+  //   coin =>
+  //     coin.currentCount !== coin.maxCount && {
+  //       id: coin.id,
+  //       diff: coin.maxCount - coin.currentCount
+  //     }
+  // );
+
+  // if (itemDiff.length === 0 && coinDiff.length === 0) {
+  //   return 'Inventory is full!';
+  // } else {
+  //   itemDiff.forEach(item => (item.id === this.inventory.items.id) && this.inventory.items);
+  // }
+  //   return this.printInventory();
+  // }
+
+  refillItems() {
+    let itemDiff = false;
+
+    this.inventory.items.forEach(item => {
+      if (item.currentCount !== item.maxCount) {
+        item.currentCount = item.maxCount;
+        itemDiff = true;
+      }
+    });
+    if (!itemDiff) return 'Items are full!';
+    return this.printInventory();
+  }
+  refillCoins() {
+    let coinDiff = false;
+
+    this.inventory.coins.forEach(coin => {
+      if (coin.currentCount !== coin.maxCount) {
         coin.currentCount = coin.maxCount;
-      });
+        coinDiff = true;
+      }
+    });
+    if (!coinDiff) return 'Coins are full!';
 
     return this.printInventory();
   }
