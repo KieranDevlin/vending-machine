@@ -42,16 +42,18 @@ describe('VendingMachine', () => {
       expect(vendingMachine.refill('coins')).toBe('Coins are full!');
     });
   });
-  describe('when attempt to purchase item with insufficient funds', () => {
-    it('should return "Insufficient funds"', () => {
-      expect(vendingMachine.dispense('A1', [0.5])).toBe('Insufficient funds');
-    });
-  });
   describe('when attempt to purchase item with no available stock', () => {
     it('should return "Item is out of stock"', () => {
       const outOfStockMachine = new VendingMachine(outOfStock);
       expect(outOfStockMachine.dispense('A1', [1])).toBe(
         'Item is out of stock\nReturned change: 1'
+      );
+    });
+  });
+  describe('when attempt to purchase item with the wrong input types', () => {
+    it('should throw an error', () => {
+      expect(() => vendingMachine.dispense(1, 'hello')).toThrow(
+        'This input is not valid'
       );
     });
   });
@@ -72,7 +74,7 @@ describe('VendingMachine', () => {
       );
     });
   });
-  describe('when item is purchased with more than $2', () => {
+  describe('when item is purchased with excessive change', () => {
     it('should return all extra coins', () => {
       expect(vendingMachine.dispense('A1', [1, 1, 1, 1, 1])).toBe(
         'Dispensed Item: COKE\nExtra change: 2,2'
@@ -86,27 +88,27 @@ describe('VendingMachine', () => {
       expect(vendingMachine.dispense('A3', [2, 2, 2, 2, 2])).toBe(
         'Dispensed Item: PURPLE\nExtra change: 2,2,2,2,0.25,0.25,0.25'
       );
+      expect(vendingMachine.dispense('A1', [1, 0.25, 0.1])).toBe(
+        'Dispensed Item: COKE\nExtra change: 0.25,0.1'
+      );
+      expect(vendingMachine.dispense('A1', [1, 0.1, 0.05])).toBe(
+        'Dispensed Item: COKE\nExtra change: 0.1,0.05'
+      );
+      expect(
+        vendingMachine.dispense('A1', [0.25, 0.25, 0.25, 0.1, , 0.1, 0.1])
+      ).toBe('Dispensed Item: COKE\nExtra change: 0.05');
     });
   });
-  //   describe('when item is purchased with correct amount of change', () => {
-  //     it('should return items and coins minus what was purchased', () => {
-  //       expect(vendingMachine.dispense('A1', [1])).toBe(
-  //         {
-  //           id: 'A1',
-  //           name: 'COKE',
-  //           cost: 1,
-  //           maxCount: 100,
-  //           currentCount: 99
-  //         },
-  //         {
-  //           id: 'loonie',
-  //           value: 1,
-  //           maxCount: 100,
-  //           currentCount: 101
-  //         }
-  //       );
-  //     });
-  //   });
+  describe('when attempt to purchase item with insufficient funds', () => {
+    it('should return "Insufficient funds"', () => {
+      expect(vendingMachine.dispense('A1', [0.5])).toBe('Insufficient funds');
+    });
+  });
+  describe('when item is purchased with exact change', () => {
+    it('should return only the item', () => {
+      expect(vendingMachine.dispense('A1', [1])).toBe('Dispensed Item: COKE');
+    });
+  });
 });
 
 //////////////DONE
@@ -115,10 +117,10 @@ describe('VendingMachine', () => {
 // re-supply change should reset change count to max - return that it succeeded and what the refill amount was - SOULD it execute a specific coin count?
 // if coins is full, test should immediatly return full
 // if inventory is full, test should immediatly return full
-
-//////////////TODO
 // dispense should reduce item count by 1, but only when change is equal or greater than cost of item, if change is greater than cost - calculate difference and dispense extra change
 // if coins entered equal/exceed total coin reject all incoming coins
+
+//////////////TODO
 // if coins arent divisible by 5, reject amount of coins to hit a number that is divisible by 5 (remove all pennies immeditatly)
 
 ////////////////////////////////////////////// TODO
