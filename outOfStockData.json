@@ -5,63 +5,63 @@
       "name": "COKE",
       "cost": 1,
       "maxCount": 100,
-      "currentCount": 100
+      "currentCount": 0
     },
     {
       "id": "A2",
       "name": "ORANGE",
       "cost": 1.9,
       "maxCount": 100,
-      "currentCount": 100
+      "currentCount": 0
     },
     {
       "id": "A3",
       "name": "PURPLE",
       "cost": 1.25,
       "maxCount": 100,
-      "currentCount": 100
+      "currentCount": 0
     },
     {
       "id": "B1",
       "name": "ROOTBEER",
       "cost": 1,
       "maxCount": 100,
-      "currentCount": 100
+      "currentCount": 0
     },
     {
       "id": "B2",
       "name": "WATER",
       "cost": 1,
       "maxCount": 100,
-      "currentCount": 100
+      "currentCount": 0
     },
     {
       "id": "B3",
       "name": "CHIPS",
       "cost": 1,
       "maxCount": 100,
-      "currentCount": 100
+      "currentCount": 0
     },
     {
       "id": "C1",
       "name": "CHOCOLATE",
       "cost": 1,
       "maxCount": 100,
-      "currentCount": 100
+      "currentCount": 0
     },
     {
       "id": "C2",
       "name": "MINTS",
       "cost": 1,
       "maxCount": 100,
-      "currentCount": 100
+      "currentCount": 0
     },
     {
       "id": "C3",
       "name": "RAISINS",
       "cost": 1,
       "maxCount": 100,
-      "currentCount": 100
+      "currentCount": 0
     }
   ],
   "coins": [
@@ -69,31 +69,31 @@
       "id": "toonie",
       "value": 2,
       "maxCount": 100,
-      "currentCount": 100
+      "currentCount": 0
     },
     {
       "id": "loonie",
       "value": 1,
       "maxCount": 100,
-      "currentCount": 100
+      "currentCount": 0
     },
     {
       "id": "quarter",
       "value": 0.25,
       "maxCount": 100,
-      "currentCount": 100
+      "currentCount": 0
     },
     {
       "id": "dime",
       "value": 0.1,
       "maxCount": 100,
-      "currentCount": 100
+      "currentCount": 0
     },
     {
       "id": "nickel",
       "value": 0.05,
       "maxCount": 100,
-      "currentCount": 100
+      "currentCount": 0
     }
   ],
   "dropBox": {

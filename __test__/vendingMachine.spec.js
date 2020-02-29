@@ -1,5 +1,6 @@
-const VendingMachine = require('../js/VendingMachine');
+const VendingMachine = require('../lib/VendingMachine');
 const inventory = require('../mockData.json');
+const outOfStock = require('../outOfStockData.json');
 
 describe('VendingMachine', () => {
   let vendingMachine;
@@ -22,23 +23,23 @@ describe('VendingMachine', () => {
   describe('when items are refilled', () => {
     it('should refill to the maxCount and print the inventory', () => {
       vendingMachine.inventory.items.forEach(item => (item.currentCount = 20));
-      expect(vendingMachine.refillItems()).toBe(inventory);
+      expect(vendingMachine.refill('items')).toBe(inventory);
     });
   });
   describe('when coins are refilled', () => {
     it('should refill to the maxCount and print the inventory', () => {
       vendingMachine.inventory.coins.forEach(coin => (coin.currentCount = 20));
-      expect(vendingMachine.refillCoins()).toBe(inventory);
+      expect(vendingMachine.refill('coins')).toBe(inventory);
     });
   });
   describe('when items are full but refilled is executed', () => {
     it('should return "Items are full!"', () => {
-      expect(vendingMachine.refillItems()).toBe('Items are full!');
+      expect(vendingMachine.refill('items')).toBe('Items are full!');
     });
   });
   describe('when coins are full but refilled is executed', () => {
     it('should return "Coins are full!"', () => {
-      expect(vendingMachine.refillCoins()).toBe('Coins are full!');
+      expect(vendingMachine.refill('coins')).toBe('Coins are full!');
     });
   });
   describe('when attempt to purchase item with insufficient funds', () => {
@@ -46,13 +47,28 @@ describe('VendingMachine', () => {
       expect(vendingMachine.dispense('A1', [0.5])).toBe('Insufficient funds');
     });
   });
+  describe('when attempt to purchase item with no available stock', () => {
+    it('should return "Item is out of stock"', () => {
+      const outOfStockMachine = new VendingMachine(outOfStock);
+      expect(outOfStockMachine.dispense('A1', [1])).toBe(
+        'Item is out of stock\nReturned change: 1'
+      );
+    });
+  });
+  describe('when attempt to purchase item that does not exsist in inventory', () => {
+    it('should return "Item does not exsist"', () => {
+      expect(vendingMachine.dispense('Z9', [1])).toBe(
+        'Item does not exsist\nReturned change: 1'
+      );
+    });
+  });
   describe('when attempt to purchase item with a bill', () => {
     it('should return "Only coins are accepted"', () => {
       expect(vendingMachine.dispense('A1', [5])).toBe(
-        'Only coins are accepted'
+        'Only coins are accepted\nReturned change: 5'
       );
       expect(vendingMachine.dispense('A1', [1, 0.25, 0.25, 5])).toBe(
-        'Only coins are accepted'
+        'Only coins are accepted\nReturned change: 1,0.25,0.25,5'
       );
     });
   });
