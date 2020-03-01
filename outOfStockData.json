@@ -61,7 +61,7 @@
       "name": "RAISINS",
       "cost": 1,
       "maxCount": 100,
-      "currentCount": 0
+      "currentCount": 100
     }
   ],
   "coins": [
@@ -75,7 +75,7 @@
       "id": "loonie",
       "value": 1,
       "maxCount": 100,
-      "currentCount": 0
+      "currentCount": 1
     },
     {
       "id": "quarter",
@@ -101,6 +101,6 @@
     "loonie": 0,
     "quarter": 0,
     "dime": 0,
-    "nikel": 0
+    "nickel": 0
   }
 }

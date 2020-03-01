@@ -1,9 +1,10 @@
 const VendingMachine = require('../lib/VendingMachine');
-const inventory = require('../mockData.json');
 const outOfStock = require('../outOfStockData.json');
+const inventory = require('../mockData.json');
 
 describe('VendingMachine', () => {
   let vendingMachine;
+
   beforeEach(() => {
     vendingMachine = new VendingMachine(inventory);
   });
@@ -64,6 +65,13 @@ describe('VendingMachine', () => {
       );
     });
   });
+  describe('when attempt to purchase item with a negative amount of money', () => {
+    it('should throw an error', () => {
+      expect(() => vendingMachine.dispense('A1', [-1])).toThrow(
+        'You cannot pay with negative monies'
+      );
+    });
+  });
   describe('when attempt to purchase item with a bill', () => {
     it('should return "Only coins are accepted"', () => {
       expect(vendingMachine.dispense('A1', [5])).toBe(
@@ -95,7 +103,7 @@ describe('VendingMachine', () => {
         'Dispensed Item: COKE\nExtra change: 0.1,0.05'
       );
       expect(
-        vendingMachine.dispense('A1', [0.25, 0.25, 0.25, 0.1, , 0.1, 0.1])
+        vendingMachine.dispense('A1', [0.25, 0.25, 0.25, 0.1, 0.1, 0.1])
       ).toBe('Dispensed Item: COKE\nExtra change: 0.05');
     });
   });
@@ -109,23 +117,28 @@ describe('VendingMachine', () => {
       expect(vendingMachine.dispense('A1', [1])).toBe('Dispensed Item: COKE');
     });
   });
+  describe('when item is purchased', () => {
+    it('add payment to dropbox', () => {
+      const testDropBox = new VendingMachine(outOfStock);
+      expect(
+        testDropBox.addToDropBox([2, 1, 0.25, 0.25, 0.1, 0.05, 0.05])
+      ).toStrictEqual({
+        toonie: 1,
+        loonie: 1,
+        quarter: 2,
+        dime: 1,
+        nickel: 2
+      });
+    });
+  });
+  describe('when item is purchased but no change is available', () => {
+    it('should return inital payment with apology', () => {
+      const outOfStockMachine = new VendingMachine(outOfStock);
+      expect(
+        outOfStockMachine.dispense('C3', [0.25, 0.25, 0.25, 0.1, 0.1, 0.1])
+      ).toBe(
+        'COIN INVENTORY IS EMPTY RETURNED CHANGE: 0.25,0.25,0.25,0.1,0.1,0.1'
+      );
+    });
+  });
 });
-
-//////////////DONE
-// inventory should print the current items count that are greater than 0 -- SHOULD it print all items? items including those at 0 count?
-// refill should reset item count to max count - return that is succeeded and what the refill amount was -- SHOULD it be all items or 1 specific refill item, sould I have both methods?
-// re-supply change should reset change count to max - return that it succeeded and what the refill amount was - SOULD it execute a specific coin count?
-// if coins is full, test should immediatly return full
-// if inventory is full, test should immediatly return full
-// dispense should reduce item count by 1, but only when change is equal or greater than cost of item, if change is greater than cost - calculate difference and dispense extra change
-// if coins entered equal/exceed total coin reject all incoming coins
-
-//////////////TODO
-// if coins arent divisible by 5, reject amount of coins to hit a number that is divisible by 5 (remove all pennies immeditatly)
-
-////////////////////////////////////////////// TODO
-// Print vending machine inventory
-// Refill vending machine inventory
-// Re-supply vending machine change
-// Dispense inventory based on payment
-// Return change as coins (e.g. \$0.35 is 1 quarter and 1 dime)
